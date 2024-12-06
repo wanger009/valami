@@ -18,18 +18,18 @@ describe('AppController (e2e)', () => {
     app = moduleFixture.createNestApplication<NestExpressApplication>();
     prisma = app.get<PrismaService>(PrismaService);
 
-    // Explicitly set the view engine for the test environment
+  
     app.useStaticAssets(join(__dirname, '..', 'public'));
     app.setBaseViewsDir(join(__dirname, '..', 'views'));
     app.setViewEngine('ejs');
 
     await app.init();
 
-    // Reset database
+    
     await prisma.child.deleteMany({});
     await prisma.game.deleteMany({});
 
-    // Create necessary records
+    
     await prisma.child.create({
       data: {
         id: 1,
@@ -48,7 +48,7 @@ describe('AppController (e2e)', () => {
       },
     });
 
-    // Verify records creation
+  
     const child = await prisma.child.findUnique({ where: { id: 1 } });
     const game = await prisma.game.findUnique({ where: { id: 1 } });
 
